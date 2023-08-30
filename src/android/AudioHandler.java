@@ -554,7 +554,6 @@ public class AudioHandler extends CordovaPlugin {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             if (!PermissionHelper.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 PermissionHelper.requestPermission(this, READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                 PermissionHelper.requestPermission(this, READ_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
                 return;
             }
         }
@@ -562,6 +561,11 @@ public class AudioHandler extends CordovaPlugin {
         // For all Android versions, check for RECORD_AUDIO permission
         if (!PermissionHelper.hasPermission(this, Manifest.permission.RECORD_AUDIO)) {
             PermissionHelper.requestPermission(this, RECORD_AUDIO, Manifest.permission.RECORD_AUDIO);
+            return;
+        }
+
+        if (!PermissionHelper.hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            PermissionHelper.requestPermission(this, READ_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
             return;
         }
 
