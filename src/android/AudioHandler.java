@@ -64,6 +64,7 @@ public class AudioHandler extends CordovaPlugin {
     // Permission Request Codes
     public static int RECORD_AUDIO = 0;
     public static int WRITE_EXTERNAL_STORAGE = 1;
+    public static int READ_EXTERNAL_STORAGE = 2;
 
     public static final int PERMISSION_DENIED_ERROR = 20;
 
@@ -552,7 +553,8 @@ public class AudioHandler extends CordovaPlugin {
         // If Android < 33, check for WRITE_EXTERNAL_STORAGE permission
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             if (!PermissionHelper.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                PermissionHelper.requestPermission(this, WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                PermissionHelper.requestPermission(this, READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                 PermissionHelper.requestPermission(this, READ_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
                 return;
             }
         }
